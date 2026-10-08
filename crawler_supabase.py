@@ -3,12 +3,11 @@ import requests
 import uuid
 from datetime import datetime, timezone, timedelta
 
-# Supabase 설정 (환경변수에서 가져옴)
 SUPABASE_URL = "https://vssngmkwyzifxpiavoja.supabase.co"
 
-# 🔥 핵심 수정: strip()을 사용해 복사 과정에서 묻은 띄어쓰기/줄바꿈 강제 제거
-raw_key = os.environ.get("SUPABASE_SERVICE_ROLE")
-SERVICE_ROLE_KEY = raw_key.strip() if raw_key else None
+# 🔥 가장 강력한 공백/줄바꿈/탭 완벽 제거 로직 ("".join(split()) 활용)
+raw_key = os.environ.get("SUPABASE_SERVICE_ROLE", "")
+SERVICE_ROLE_KEY = "".join(raw_key.split()) if raw_key else None
 
 TABLE = "community_posts"
 BUCKET = "images" 
