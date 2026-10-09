@@ -3,6 +3,7 @@ import io
 import os
 import json
 import time
+import random
 from urllib.parse import urljoin, parse_qs, urlparse
 import requests
 from bs4 import BeautifulSoup
@@ -135,4 +136,10 @@ def crawl_once():
         print("   ✅ 새 글 없음.", flush=True)
 
 if __name__ == "__main__":
+    # 1분에서 15분 사이의 랜덤한 시간을 뽑아 먼저 대기합니다.
+    delay_minutes = random.randint(1, 15)
+    print(f"자연스러운 패턴 생성을 위해 {delay_minutes}분 동안 대기합니다...")
+    time.sleep(delay_minutes * 60)
+    
+    # 랜덤한 대기 시간이 끝난 비로소 크롤링을 시작합니다.
     crawl_once()
